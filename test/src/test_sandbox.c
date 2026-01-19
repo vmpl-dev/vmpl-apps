@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -5,8 +6,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#ifdef __GLIBC__
 #include <asm/prctl.h>
+#else
 #include <sys/prctl.h>
+#define ARCH_GET_FS 0x1003
+#endif
 
 #define NUM_THREADS 10
 

@@ -10,7 +10,7 @@ static void recover(void)
 	exit(0);
 }
 
-static void divide_by_zero_handler(struct pt_regs *tf)
+static void divide_by_zero_handler(struct dune_tf *tf)
 {
 	printf("hello: caught divide by zero!\n");
 	tf->rip = (uintptr_t)&recover;
