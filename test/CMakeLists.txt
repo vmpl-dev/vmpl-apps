@@ -17,13 +17,13 @@ foreach(program ${TEST_PROGRAMS})
     endif()
 endforeach()
 
-# 为特定程序添加额外的链接库
-target_link_libraries(mprotect dune vmpl)
-target_link_libraries(timetest dune)
+# 为特定程序添加额外的链接库（需要显式链接 libvmpl 的依赖库）
+target_link_libraries(mprotect dune vmpl dict hotcalls)
+target_link_libraries(timetest dune vmpl dict hotcalls)
 
 # 其他程序链接通用库
 foreach(program ${TEST_PROGRAMS})
     if(NOT ${program} STREQUAL "mprotect" AND NOT ${program} STREQUAL "timetest")
-        target_link_libraries(${program} dune vmpl pthread)
+        target_link_libraries(${program} dune vmpl dict hotcalls pthread)
     endif()
 endforeach()

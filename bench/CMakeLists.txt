@@ -13,7 +13,8 @@ set(BENCH_PROGRAMS
 foreach(program ${BENCH_PROGRAMS})
     add_executable(${program} src/${program}.c)
     target_include_directories(${program} PRIVATE include)
-    target_link_libraries(${program} PRIVATE dune vmpl)
+    # 需要显式链接 libvmpl 的依赖库
+    target_link_libraries(${program} PRIVATE dune vmpl dict hotcalls)
 endforeach()
 
 # bench_linux 动态链接
